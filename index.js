@@ -3,27 +3,30 @@
 /* global $ */
 
 const STORE = function () {
-    // /*const items = [
+    let displayBookmarkForm = false;
+    let bookmarkList =[];
+    // const items = [
     //     {title: title},
     //     {url: url},
     //     {descripttion: description},
     //     {rating: 0},
     //     {expansion: false},
-    // ]*/
-    
+    // ]
+  
+  
+    return {
+        displayBookmarkForm,
+        bookmarkList
+   } 
 
 }();
 
-function handleNewBookmarkSubmit() {
-    /* This function will have the Bookmark form appear
-    and have users either submit or reset*/
-    $('.add-bookmark').on('click',  function (event) {
-        console.log('ready to add bookmark');
-        return `<div class="new-bookmark-form">
+function renderBookmarkForm(){
+    const form = `<div class="new-bookmark-form">
         <form>
             <label for="name">Bookmark name</label>
             <input type="text" name="Bookmark name">
-
+    
             <label for="url">URL</label>
             <input type="text" name="URL for bookmark">
             
@@ -41,19 +44,69 @@ function handleNewBookmarkSubmit() {
               <button type="submit">Submit</button>
         
              </div>`
-    })
+    if(STORE.displayBookmarkForm == true){
+        $('.new-bookmark-form').html(form);
+    }
+    else{
+        $('.new-bookmark-forms').html('')
+    }
 
 }
 
-function displayBookmarkList(){
+function handleAddBookmarkClick(){
+    $('.add-bookmark').on('click', function(){
+        STORE.displayBookmarkForm = !STORE.displayBookmarkForm;
+        renderBookmarkForm();
+    });
+}
+
+function renderBookmarkList(){
+    let list= [`<div class="js-bookmark-list">
+        <ul class="bookmark-item">
+         <li>
+           <p>Name: example <br>
+           URL:www.example.com  <br>
+           Description: exapmle description <br>
+           Rating: 0
+          </p>
+          <button class="delete-button" type="button">Delete</button>
+         </li>
+        </ul>
+     </div>` ]
+     $('.js-bookmark-list').html(list);
+}
+
+
+
+// function handleDisplayBookmarkList(){
     
-}
+//     STORE.displayBookMark.push(`<div class="js-bookmark-list">
+//     <ul class="bookmark-item">
+//      <li>
+//        <p>'Name: '<br>
+//        'URL: ' <br>
+//        'Description: ' <br>
+//       </p>
+//       <button class="delete-button" type="button">Delete</button>
+//      </li>
+//     </ul>
+//  </div>`);
+//  $('.js-bookmark-list').html(STORE.displayBookMark);
+//  console.log('displayBookMarkList is working.')
+// }
 
-function handleEditBookmark() {
-    /* This function will edit the title, url, rating and 
-    description of all existing bookmarks*/
 
-}
+
+
+
+
+
+// function handleEditBookmark() {
+//      extension function    
+//     /* This function will edit the title, url, rating and 
+//     description of all existing bookmarks*/
+
+// }
 
 function handleDeleteBookmark() {
     //This function will delete bookmarks from store
@@ -88,22 +141,6 @@ function render() {
     //const bookmarkItemString = generateBookmarkString(items);
 }
 
-function generateBookmark() {
-    $(".new-bookmark-form").submit(function (event) {
-        console.log('function ran');
-        //This function will generate HTML for a single bookmark.
-        return `<div class="js-bookmark-list">
-               <ul class="bookmark-item">
-                <li>
-                  <p>'Name: facebook.com'<br>
-                  'URL: http://facebook.com' <br>
-                  'Description: search query site' <br>
-                 </p>
-                 <button class="delete-button" type="button">Delete</button>
-                </li>
-               </ul>
-            </div>`});
-};
 
 function generateBookmarkString() {
     //This function will convert data to HTML string for the DOM.
@@ -121,8 +158,8 @@ function expandBookmark() {
 
 
 function main() {
-   handleNewBookmarkSubmit(); 
-   generateBookmark();
+   renderBookmarkList();
+   handleAddBookmarkClick();
    render();
 }
 
