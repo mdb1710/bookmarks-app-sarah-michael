@@ -13,21 +13,52 @@
     <div class="button-area">
         <button type="button">Add Bookmark</button>
         <div class="dropdown">
-                <button class="dropbtn">Dropdown</button>
-                <div class="dropdown-content">
-                  <a href="#">All</a>
-                  <a href="#">5 Star Rating</a>
-                  <a href="#">4 Star Rating</a>
-                  <a href="#">3 Star Rating</a>
-                  <a href="#">2 Star Rating</a>
-                  <a href="#">1 Star Rating</a>
-                </div>
+                <select name="cars">
+                        <option value="all">All bookmarks</option>
+                        <option value="five">5 stars</option>
+                        <option value="four">4 stars</option>
+                        <option value="three">3 stars</option>
+                        <option value="two">2 stars</option>
+                        <option value="one">1 star</option>
+                      </select>
         </div>
         <button type="submit">Submit</button>
     </div>
-    <div class="js-bookmark-list">
+    <div class="new-book-mark-form">
+        <form>
+            <label for="name">Bookmark name</label>
+            <input type="text" name="Bookmark name">
 
+            <label for="url">URL</label>
+            <input type="text" name="URL for bookmark">
+            
+            <label for="description">Description</label>
+            <input type="text" name="Description">
+        </form>
+        <form>
+                <input type="radio" name="stars" value="five" checked> 5 stars<br>
+                <input type="radio" name="stars" value="four"> 4 stars<br>
+                <input type="radio" name="stars" value="three"> 3 stars<br>
+                <input type="radio" name="stars" value="two"> 2 stars<br>
+                <input type="radio" name="stars" value="one"> 1 star
+              </form>
+              <button type="reset">Clear</button>
+              <button type="submit">Submit</button>
+        <!-- ERROR BUTTON- DO WE NEED TO WRITE SPECIAL CODE?      -->
+              
+    </div>
+    <div class="js-bookmark-list">
+        <ul class="bookmark-item">
+            <li>
+             <p>`Name: google.com` <br>
+            `URL: http://google.com` <br>
+            `Description: search query site` <br>
+            </p>
+            <button class="delete-button" type="button">Delete</button>
+            </li>
     </div>    
+    
+
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
     <script src="index.js"></script>  
