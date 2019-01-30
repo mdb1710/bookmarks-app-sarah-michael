@@ -6,15 +6,7 @@ const STORE = function () {
     let displayBookmarkForm = false;
     let bookmarkList =[];
     let hideDescription = true;
-    let hideURL = true;
-    // const items = [
-    //     {title: title},
-    //     {url: url},
-    //     {descripttion: description},
-    //     {rating: 0},
-    //     {expansion: false},
-    // ]
-  
+    let hideURL = true;  
   
     return {
         displayBookmarkForm,
@@ -37,17 +29,14 @@ function renderBookmarkForm(){
             <label for="description">Description</label>
             <input type="text" name="Description" class='description-entry'>
         
-                <input type="radio" name="stars" value="five" checked> 5 stars<br>
-                <input type="radio" name="stars" value="four"> 4 stars<br>
-                <input type="radio" name="stars" value="three"> 3 stars<br>
-                <input type="radio" name="stars" value="two"> 2 stars<br>
-                <input type="radio" name="stars" value="one"> 1 star <br>
+                <input type="radio" name="stars" value="5"> 5 stars<br>
+                <input type="radio" name="stars" value="4"> 4 stars<br>
+                <input type="radio" name="stars" value="3"> 3 stars<br>
+                <input type="radio" name="stars" value="2"> 2 stars<br>
+                <input type="radio" name="stars" value="1"> 1 star <br>
                 <button type="reset">Clear</button>
               <button type="submit" class="js-bookmark-submit">Submit</button>
-              </form>`
-              
-        
-             
+              </form>`        
     if(STORE.displayBookmarkForm == true){
         $('.new-bookmark-form').html(form);
     }
@@ -57,6 +46,28 @@ function renderBookmarkForm(){
 
 }
 
+
+function renderBookmark(bookmark){
+return `<li>Title: ${bookmark.name}
+Description: ${bookmark.description}
+URL: ${bookmark.url} 
+Rating: ${bookmark.rating}
+<button class="expand-button" type="button">Expand</button>
+<button class="delete-button" type="button">Delete</button></li>`
+}
+
+function renderBookmarkList(){
+    const displayList= `
+        <ul class="bookmark-item">
+         ${STORE.bookmarkList.map( bookmark => renderBookmark(bookmark))}
+        </ul>` 
+          
+     $('.js-bookmark-list').html(displayList);
+      
+     
+}
+
+
 function handleAddBookmarkClick(){
     $('.add-bookmark').on('click', function(){
         STORE.displayBookmarkForm = !STORE.displayBookmarkForm;
@@ -64,56 +75,46 @@ function handleAddBookmarkClick(){
     });
 }
 
-
-
 function captureBookmark(){
     $('.new-bookmark-form').on('submit','form',function(event) {
         event.preventDefault();
         console.log('add bookmark done');
         let bookmarkTitle = $('.name-entry').val();
-        console.log(bookmarkTitle);
         let urlTitle = $('.URL-entry').val();
-        console.log(urlTitle);
         let description = $('.description-entry').val();
-        console.log(description);
-     })
+        console.log(event.currentTarget.stars)
+        let ratingNumber= event.currentTarget.stars.value
+        console.log(bookmarkTitle, urlTitle, description, ratingNumber);
+        
+        let displayedBookmarks={ 
+        name: bookmarkTitle,
+        url: urlTitle,
+        description: description,
+        rating: ratingNumber}
+        
+        STORE.bookmarkList.push(displayedBookmarks);
+        renderBookmarkList();
+        }) } 
+
      
      
-    
-}
+function toggleHiddenItems(){
+ STORE.hideDescription = !STORE.hideDescription;
+ STORE.hideURL = !STORE.hideURL;
+    }
 
 function expandBookmark() {
     //This function will show full description and url of bookmark when clicked.
     //render();
+    //will remove the hidden class from description and URL
     
 
 }
 
 
-function toggleHiddenItems(){
-    STORE.hideDescription = !STORE.hideDescription;
-    STORE.hideURL = !STORE.hideURL;
-}
 
-function renderBookmarkList(){
-    let list= [`<div class="js-bookmark-list">
-        <ul class="bookmark-item">
-         <li>Title: </li>
-         <li class="hidden">Description: </li>
-         <li class="hidden">URL: </li>
-         <li>Rating: </li>
-        </ul>
-        <button class="expand-button" type="button">Expand</button>
-        <button class="delete-button" type="button">Delete</button>
-     </div>` ]
-    //  <p>Name: example <br>
-    //        URL:www.example.com  <br>
-    //        Description: exapmle description <br>
-    //        Rating: 0
-    //       </p>
-          
-     $('.js-bookmark-list').html(list);
-}
+
+
 
 
 
@@ -166,7 +167,7 @@ function generateBookmarkString() {
 
 
 function main() {
-   renderBookmarkList();
+//    renderBookmarkList();
    handleAddBookmarkClick();
    captureBookmark();
    render();
