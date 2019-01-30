@@ -1,6 +1,6 @@
 'use strict';
 
-/* global $ */
+/* global $, bookmark */
 
 const STORE = function () {
     let displayBookmarkForm = false;
@@ -47,16 +47,50 @@ function renderBookmarkForm(){
 }
 
 
+{/* <div id="full-description">
+    Description: ${bookmark.description}
+    URL: ${bookmark.url}
+  </div> */}
+
 function renderBookmark(bookmark){
-return `<li>Title: ${bookmark.name}
-Description: ${bookmark.description}
-URL: ${bookmark.url} 
-Rating: ${bookmark.rating}
-<button class="expand-button" type="button">Expand</button>
-<button class="delete-button" type="button">Delete</button></li>`
+if (STORE.hideURL == true){
+return `<li class='new-bookmark'>
+<button class="expand-button" type="button">Expand</button><br>
+<button class="delete-button" type="button">Delete</button><br>
+Title: ${bookmark.name} <br>
+Rating: ${bookmark.rating} <br>
+</li>`
+} else {
+    return `<li class='new-bookmark'>
+    <button class="expand-button" type="button">Expand</button><br>
+    <button class="delete-button" type="button">Delete</button><br>
+    Title: ${bookmark.name} <br>
+    Rating: ${bookmark.rating} <br>
+    Description: ${bookmark.description}<br>
+    URL: ${bookmark.url}
+    </li>`
+}
 }
 
+// function renderExpandedBookmark(){
+//     const expanded = `<li class='new-bookmark'>
+//     <button class="expand-button" type="button">Expand</button><br>
+//     <button class="delete-button" type="button">Delete</button><br>
+//     Title:  <br>
+//     Rating:  <br>
+//     Description: <br>
+//     URL: 
+//     </li>`
+//   if(STORE.hideDescription == false){
+//     $('li').html(expanded);
+// }
+// else{
+//     $('li').html('')
+// }
+// }
+
 function renderBookmarkList(){
+    
     const displayList= `
         <ul class="bookmark-item">
          ${STORE.bookmarkList.map( bookmark => renderBookmark(bookmark))}
@@ -64,7 +98,7 @@ function renderBookmarkList(){
           
      $('.js-bookmark-list').html(displayList);
       
-     
+     expandBookmark();
 }
 
 
@@ -90,25 +124,40 @@ function captureBookmark(){
         name: bookmarkTitle,
         url: urlTitle,
         description: description,
-        rating: ratingNumber}
+        rating: ratingNumber
+        }
         
         STORE.bookmarkList.push(displayedBookmarks);
         renderBookmarkList();
-        }) } 
+        }) }
 
      
      
-function toggleHiddenItems(){
- STORE.hideDescription = !STORE.hideDescription;
- STORE.hideURL = !STORE.hideURL;
-    }
+
 
 function expandBookmark() {
     //This function will show full description and url of bookmark when clicked.
     //render();
     //will remove the hidden class from description and URL
-    
+    $('.expand-button').on('click', function(){
+        
+        console.log('expand button works');
+        toggleHiddenDescription();
+        renderBookmarkList();
+        console.log(STORE.hideDescription);
+        
+    })
 
+}
+
+function toggleHiddenDescription(){
+    STORE.hideDescription = !STORE.hideDescription;
+    STORE.hideURL = !STORE.hideURL;
+    if (STORE.hideDescription == true){
+    $("#full-description").addClass(".hidden");
+    console.log('remove class works');
+    }
+    
 }
 
 
@@ -170,6 +219,7 @@ function main() {
 //    renderBookmarkList();
    handleAddBookmarkClick();
    captureBookmark();
+   
    render();
 }
 
