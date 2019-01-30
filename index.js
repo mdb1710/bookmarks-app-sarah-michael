@@ -60,6 +60,8 @@ function handleAddBookmarkClick(){
     });
 }
 
+
+
 function renderBookmarkList(){
     let list= [`<div class="js-bookmark-list">
         <ul class="bookmark-item">
