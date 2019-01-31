@@ -1,3 +1,6 @@
+//added handleDeleteBookmark and beginnings to a filter function for filtering by stars
+//none are working, but I think both have the right logic about what to do
+
 'use strict';
 
 /* global $, bookmark */
@@ -7,12 +10,17 @@ const STORE = function () {
     let bookmarkList =[];
     let hideDescription = true;
     let hideURL = true;  
+
+    function findByID(id){
+        return this.bookmarkList.find(bookmarkList => bookmarkList.id === id)
+    };
   
     return {
         displayBookmarkForm,
         bookmarkList,
         hideDescription,
-        hideURL
+        hideURL,
+        findByID
    } 
 
 }();
@@ -27,7 +35,7 @@ function renderBookmarkForm(){
             <input type="text" name="URL for bookmark" class='URL-entry'>
             
             <label for="description">Description</label>
-            <input type="text" name="Description" class='description-entry'>
+            <input type="text" name="Description" class='description-entry'><br>
         
                 <input type="radio" name="stars" value="5"> 5 stars<br>
                 <input type="radio" name="stars" value="4"> 4 stars<br>
@@ -72,22 +80,6 @@ Rating: ${bookmark.rating} <br>
 }
 }
 
-// function renderExpandedBookmark(){
-//     const expanded = `<li class='new-bookmark'>
-//     <button class="expand-button" type="button">Expand</button><br>
-//     <button class="delete-button" type="button">Delete</button><br>
-//     Title:  <br>
-//     Rating:  <br>
-//     Description: <br>
-//     URL: 
-//     </li>`
-//   if(STORE.hideDescription == false){
-//     $('li').html(expanded);
-// }
-// else{
-//     $('li').html('')
-// }
-// }
 
 function renderBookmarkList(){
     
@@ -99,6 +91,7 @@ function renderBookmarkList(){
      $('.js-bookmark-list').html(displayList);
       
      expandBookmark();
+     handleDeleteBookmark();
 }
 
 
@@ -161,17 +154,40 @@ function toggleHiddenDescription(){
 }
 
 
+function filterByRating(rating) {
+    for(let i=0; i< bookmark.rating.length; i++){
+        if(bookmark.rating[i] <= rating){
+            bookmark.rating[i].remove();
+        }
+        else{
+            bookmark.rating[i]
+        }
+    }
+}
 
+function handleFilter(){
+    $('.filter-rating').on('submit', '.stars-options', function(event){
+        console.log(`filter happening on dropdown`);
+        event.preventDefault();
+        const filteredRating= $('.filter-rating').val();
 
-
-
-
+      filterByRating(filteredRating)
+      renderBookmarkList();  
+    })
+}
 
 
 
 function handleDeleteBookmark() {
-    //This function will delete bookmarks from store
-    //render(); 
+    $('.delete-button').on('click', function(event){
+        console.log(`delete button clicked`)
+        event.preventDefault();
+        const currentItem =$(event.currentTarget).closest('li').attr('id');
+        console.log(currentItem);
+//create variable for the currentIteminStore that accepts currentItem & can later be removed with slice.
+        const currentIteminStore= STORE.findbyID(currentItem);
+console.log(currentIteminStore);
+    })
 }
 
 function error() {
@@ -203,24 +219,14 @@ function render() {
 }
 
 
-function generateBookmarkString() {
-    //This function will convert data to HTML string for the DOM.
-    return ``
-    //render();
-}
-
-
-
-
-
-
-
 function main() {
 //    renderBookmarkList();
    handleAddBookmarkClick();
    captureBookmark();
-   
+   handleFilter();
    render();
+   
 }
 
 $(main);
+
