@@ -70,43 +70,31 @@ function renderBookmark(bookmark){
     Title: ${bookmark.name} <br>
     Rating: ${bookmark.rating} <br>
     Description: ${bookmark.description}<br>
-     URL: ${bookmark.url}
+     URL: <a href="https://${bookmark.url}">Visit Site</a>
      </li>`
         }
     }
-    // $('.filter').on('change', function(){
-    //     STORE.filterValue = $(this).val();
-    //     bookmarks.renderBookmarks();
-    //   });
-      
-    //   renderBookmarks(){
-    //     let items = STORE.bookmarkItems;
-    //     if(STORE.filterValue > 1){
-    //       items = STORE.bookmarkItems.filter(bookmark => bookmark.rating >= STORE.filterValue);
-    //     }
-    //     items.map(bookmark => renderBookmark(bookmark));
-    //   }
 
 function handleFilter(){
-    $('.filter-rating').on('change', function(){
+    $('.stars-options').on('change', function(){
     console.log(`filter happening on dropdown`);
     STORE.filterValue= $(this).val();
+    console.log(STORE.filterValue);
     bookmarks.renderBookmarkList();
     })}  
-    
+
 function renderBookmarkList(){
     console.log(`renderbookmarkList is running`)
     let items= STORE.bookmarkList;
-    if(STORE.filterValue > 5){
+    console.log(STORE.filterValue);
+    if(STORE.filterValue > 0){
+        
         items = STORE.bookmarkList.filter(bookmark => bookmark.rating >= STORE.filterValue)
     }
-    items.map(bookmark =>{
-    console.log(bookmark);
-     renderBookmarkList(bookmark)  })
 
     const displayList= 
     ` <ul class="bookmark-item">
-    ${STORE.bookmarkList.map( bookmark => {
+    ${items.map( bookmark => {
     console.log(bookmark);
    return  renderBookmark(bookmark)})}
     </ul>` 
