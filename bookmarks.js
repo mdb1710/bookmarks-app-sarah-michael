@@ -13,11 +13,11 @@ const bookmarks = (function(){
                 <label for="description">Description</label>
                 <input type="text" name="Description" class='description-entry'><br>
             
-                    <input type="radio" name="stars" value="5"> 5 stars<br>
-                    <input type="radio" name="stars" value="4"> 4 stars<br>
-                    <input type="radio" name="stars" value="3"> 3 stars<br>
-                    <input type="radio" name="stars" value="2"> 2 stars<br>
-                    <input type="radio" name="stars" value="1"> 1 star <br>
+                    <p><input type="radio" name="stars" value="5" id="5-stars"><label for="5-stars"> 5 stars</label></p>
+                    <p><input type="radio" name="stars" value="4" id="4-stars"><label for="4-stars"> 4 stars</label></p>
+                    <p><input type="radio" name="stars" value="3" id="3-stars"><label for="3-stars"> 3 stars</label></p>
+                    <p><input type="radio" name="stars" value="2" id="2-stars"><label for="2-stars"> 2 stars</label></p>
+                    <p><input type="radio" name="stars" value="1" id="1-stars"><label for="1-stars"> 1 star </label></p>
                     <button type="reset">Clear</button>
                   <button type="submit" class="js-bookmark-submit">Submit</button>
                   </form>`        
@@ -57,14 +57,14 @@ function captureBookmark(){
 
 function renderBookmark(bookmark){
  if (STORE.hideURL == true){
- return `<li class='new-bookmark'>
+ return `<li class='new-bookmark' id='${bookmark.id}'>
         <button class="expand-button" type="button">Expand</button><br>
         <button class="delete-button" type="button">Delete</button><br>
         Title: ${bookmark.name} <br>
         Rating: ${bookmark.rating} <br>
         </li>`
  } else {
- return `<li class='new-bookmark'>
+ return `<li class='new-bookmark' id='${bookmark.id}'>
     <button class="expand-button" type="button">Expand</button><br>
     <button class="delete-button" type="button">Delete</button><br>
     Title: ${bookmark.name} <br>
@@ -152,11 +152,13 @@ function handleDeleteBookmark() {
      $('.delete-button').on('click', function(event){
        console.log(`delete button clicked`)
        event.preventDefault();
-        const currentItem =$(event.currentTarget).closest('li').attr('id');
+       const currentItem =$(event.currentTarget).closest('li').attr('id');
        console.log(currentItem);
         //create variable for the currentIteminStore that accepts currentItem & can later be removed with slice.
-        const currentIteminStore= STORE.findbyID(currentItem);
-        console.log(currentIteminStore);
+        //const currentIteminStore= STORE.findbyID(currentItem);
+        STORE.bookmarkList = STORE.bookmarkList.filter((bookmark)=> bookmark.id !== currentItem);
+        //console.log(currentIteminStore);
+        renderBookmarkList();
             })
         }
 
