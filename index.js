@@ -1,7 +1,7 @@
 
 'use strict';
 
-/* global $, bookmark, cuid */
+/* global $, bookmark, cuid, api */
 
 
 
@@ -39,6 +39,15 @@ function main() {
    //captureBookmark();
    //handleFilter();
    //render();
+   api.getBookmarks().then(data => {
+    console.log(data);
+    STORE.bookmarkList = data
+    bookmarks.renderBookmarkList();  
+   }) 
+//    api.createBookmark().then(res => res.json())
+//       .then(data => {
+//           console.log(data);
+//       })
    bookmarks.bindEventListeners();
    
 }

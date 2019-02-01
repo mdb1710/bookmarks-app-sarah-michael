@@ -1,4 +1,4 @@
-/* global STORE, $, cuid */
+/* global STORE, $, cuid, api */
 
 const bookmarks = (function(){
     function renderBookmarkForm(){
@@ -42,15 +42,19 @@ function captureBookmark(){
            console.log(bookmarkTitle, urlTitle, description, ratingNumber);
                       
           let displayedBookmarks={
-           id: cuid(),
-           name: bookmarkTitle,
+           
+           title: bookmarkTitle,
            url: urlTitle,
-           description: description,
+           desc: description,
             rating: ratingNumber
             }
-                      
-        STORE.bookmarkList.push(displayedBookmarks);
-        renderBookmarkList();
+          api.createBookmark(displayedBookmarks)
+             .then(res => res.json())
+             .then(data => {
+                STORE.bookmarkList.push(displayedBookmarks);
+                renderBookmarkList();
+             })
+        
           }) }
               
 
@@ -60,16 +64,16 @@ function renderBookmark(bookmark){
  return `<li class='new-bookmark' id='${bookmark.id}'>
         <button class="expand-button" type="button">Expand</button><br>
         <button class="delete-button" type="button">Delete</button><br>
-        Title: ${bookmark.name} <br>
+        Title: ${bookmark.title} <br>
         Rating: ${bookmark.rating} <br>
         </li>`
  } else {
  return `<li class='new-bookmark' id='${bookmark.id}'>
     <button class="expand-button" type="button">Expand</button><br>
     <button class="delete-button" type="button">Delete</button><br>
-    Title: ${bookmark.name} <br>
+    Title: ${bookmark.title} <br>
     Rating: ${bookmark.rating} <br>
-    Description: ${bookmark.description}<br>
+    Description: ${bookmark.desc}<br>
      URL: <a href="https://${bookmark.url}">Visit Site</a>
      </li>`
         }
