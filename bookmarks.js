@@ -47,14 +47,20 @@ function captureBookmark(){
            desc: description,
             rating: ratingNumber
             }
-
+ $(".error").on('click', () =>{
+    $(".error").toggleClass("hidden");
+ })
   api.createBookmark(displayedBookmarks)
-             .then(res => res.json())
+             //.then(res => res.json())
              .then(data => {
                 console.log(data)
                 STORE.bookmarkList.push(data);
                 console.log(displayedBookmarks)
                 renderBookmarkList();
+                
+    }).catch(err => {
+        $(".error").text(err.message);
+        $(".error").toggleClass("hidden");
     })
         
 }) }
@@ -63,14 +69,14 @@ function captureBookmark(){
 
 function renderBookmark(bookmark){
  if (STORE.hideURL == true){
- return `<li class='new-bookmark' id='${bookmark.id}'>
+ return `<li class='new-bookmark' id='test'>
         <button class="expand-button" type="button">Expand</button><br>
         <button class="delete-button" type="button">Delete</button><br>
         Title: ${bookmark.title} <br>
         Rating: ${bookmark.rating} <br>
         </li>`
  } else {
- return `<li class='new-bookmark' id='${bookmark.id}'>
+ return `<li class='new-bookmark' id='test'>
     <button class="expand-button" type="button">Expand</button><br>
     <button class="delete-button" type="button">Delete</button><br>
     Title: ${bookmark.title} <br>
@@ -158,7 +164,7 @@ function handleDeleteBookmark() {
        
    
        api.deleteItem(id)
-       .then(res => res.json())
+       //.then(res => res.json())
        .then(data => {
        STORE.bookmarkList = STORE.bookmarkList.filter((bookmark)=> bookmark.id !== id)
         renderBookmarkList()})

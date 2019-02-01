@@ -39,7 +39,9 @@ function main() {
    //captureBookmark();
    //handleFilter();
    //render();
-   api.getBookmarks().then(data => {
+   api.getBookmarks()
+    //.then(res => res.json())
+    .then(data => {
     console.log(data);
     STORE.bookmarkList = data
     bookmarks.renderBookmarkList();  

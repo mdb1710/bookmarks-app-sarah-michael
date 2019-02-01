@@ -1,3 +1,9 @@
+.error {
+    display: block;
+    color: red;
+    font-size: 2em;
+}
+
 .hidden{
     display: none;
 }
