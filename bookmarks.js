@@ -42,20 +42,22 @@ function captureBookmark(){
            console.log(bookmarkTitle, urlTitle, description, ratingNumber);
                       
           let displayedBookmarks={
-           
            title: bookmarkTitle,
            url: urlTitle,
            desc: description,
             rating: ratingNumber
             }
-          api.createBookmark(displayedBookmarks)
+
+  api.createBookmark(displayedBookmarks)
              .then(res => res.json())
              .then(data => {
-                STORE.bookmarkList.push(displayedBookmarks);
+                console.log(data)
+                STORE.bookmarkList.push(data);
+                console.log(displayedBookmarks)
                 renderBookmarkList();
-             })
+    })
         
-          }) }
+}) }
               
 
 
@@ -85,7 +87,8 @@ function handleFilter(){
     STORE.filterValue= $(this).val();
     console.log(STORE.filterValue);
     bookmarks.renderBookmarkList();
-    })}  
+    })
+}  
 
 function renderBookmarkList(){
     console.log(`renderbookmarkList is running`)
@@ -147,28 +150,19 @@ $('.expand-button').on('click', function(){
      }
         
         
-        
-
-        
-        
-        
 function handleDeleteBookmark() {
      $('.delete-button').on('click', function(event){
        console.log(`delete button clicked`)
        event.preventDefault();
-       const currentItem =$(event.currentTarget).closest('li').attr('id');
-       console.log(currentItem);
-        //create variable for the currentIteminStore that accepts currentItem & can later be removed with slice.
-        //const currentIteminStore= STORE.findbyID(currentItem);
-        STORE.bookmarkList = STORE.bookmarkList.filter((bookmark)=> bookmark.id !== currentItem);
-        //console.log(currentIteminStore);
-        renderBookmarkList();
+       const id =$(event.currentTarget).closest('li').attr('id');
+       
+   
+       api.deleteItem(id)
+       .then(res => res.json())
+       .then(data => {
+       STORE.bookmarkList = STORE.bookmarkList.filter((bookmark)=> bookmark.id !== id)
+        renderBookmarkList()})
             })
-        }
-
-function filterByRating() {
-   //This function will filter bookmark list by rating.
-   //render();
         }
         
  function render() {

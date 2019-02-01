@@ -11,23 +11,24 @@
                  .then(res => res.json())
     }
 
-    $.fn.extend ({
-        serializeJson: function (){
-            const formData = new FormData(this[0]);
-            const o = {};
-            formData.forEach((val, name) => {
-                return o[name] = val;
-            });
-            console.log(o);
-            return JSON.stringify(o);
+    // $.fn.extend ({
+    //     serializeJson: function (){
+    //         const formData = new FormData(this[0]);
+    //         const o = {};
+    //         formData.forEach((val, name) => {
+    //             return o[name] = val;
+    //         });
+    //         console.log(o);
+    //         return JSON.stringify(o);
             
-        }
-    })
+    //     }
+    // })
 
-    function handleSubmit(e){
-        $(e.target).serializeJson();
-        console.log(e.target);
-    }
+    // function handleSubmit(e){
+    //     $(e.target).serializeJson();
+    //     console.log(e.target);
+    // }
+
 
     function createBookmark(bookmark){
         const newBookmark = JSON.stringify(bookmark)
@@ -44,10 +45,22 @@
 
     }
 
+function deleteItem(id, updateData){
+    return fetch(`${BASE_URL}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type" : "application/json"
+        },
+    body: JSON.stringify(updateData)
+    })
+ 
+    }
+
     return {
         getBookmarks,
         createBookmark,
-        handleSubmit
+        //handleSubmit,
+        deleteItem
     }
 
  }();
