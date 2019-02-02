@@ -45,12 +45,13 @@ function captureBookmark(){
            let ratingNumber= event.currentTarget.stars.value
            console.log(bookmarkTitle, urlTitle, description, ratingNumber);
                       
-          let displayedBookmarks={
-           title: bookmarkTitle,
-           url: urlTitle,
-           desc: description,
-            rating: ratingNumber
-            }
+        let displayedBookmarks={
+          title: bookmarkTitle,
+          url: urlTitle,
+          desc: description,
+          rating: ratingNumber,
+          hiddenDescrip: true
+            }   
  $(".error").on('click', () =>{
     $(".error").toggleClass("hidden");
  })
@@ -139,7 +140,7 @@ function expandBookmark() {
    //render();
     //will remove the hidden class from description and URL
 $('li').on('click', '.expand-button', function(event){
-    const id = $('li').closest("#id");
+    const id =  $(event.currentTarget).closest('li').attr('id');
     console.log(id);
     event.preventDefault();            
     console.log('expand button works');
@@ -167,7 +168,7 @@ function handleDeleteBookmark() {
        console.log(`delete button clicked`)
        event.preventDefault();
        const id =$(event.currentTarget).closest('li').attr('id');
-       
+       console.log(id);
    
        api.deleteItem(id)
        //.then(res => res.json())

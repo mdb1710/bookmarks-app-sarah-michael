@@ -73,6 +73,12 @@ form{
     display: block;
     color: red;
     font-size: 2em;
+    background-color: rgba(223, 104, 104, 0.596);
+    text-align: center;
+}
+
+.small-text{
+    font-size: 10px;
 }
 
 .hidden{
