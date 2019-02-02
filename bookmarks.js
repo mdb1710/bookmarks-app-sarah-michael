@@ -4,15 +4,17 @@ const bookmarks = (function(){
     function renderBookmarkForm(){
         const form = `
             <form>
-                <label for="name">Bookmark name</label>
-                <input type="text" name="Bookmark name" class='name-entry'>
+              <fieldset>
+                <legend>Fill out the informaton and rating for the new bookmark</legend>
+                <label for="bookmark-title">Bookmark name</label>
+                <input type="text" name="Bookmark name" class='name-entry' id="bookmark-title">
         
-                <label for="url">URL</label>
-                <input type="text" name="URL for bookmark" class='URL-entry'>
+                <label for="bookmark-url">URL</label>
+                <input type="text" name="URL for bookmark" class='URL-entry' id="bookmark-url">
                 
-                <label for="description">Description</label>
-                <input type="text" name="Description" class='description-entry'><br>
-            
+                <label for="bookmark-description">Description</label>
+                <input type="text" name="Description" class='description-entry' id="bookmark-description"><br>
+                   
                     <p><input type="radio" name="stars" value="5" id="5-stars"><label for="5-stars"> 5 stars</label></p>
                     <p><input type="radio" name="stars" value="4" id="4-stars"><label for="4-stars"> 4 stars</label></p>
                     <p><input type="radio" name="stars" value="3" id="3-stars"><label for="3-stars"> 3 stars</label></p>
@@ -20,7 +22,8 @@ const bookmarks = (function(){
                     <p><input type="radio" name="stars" value="1" id="1-stars"><label for="1-stars"> 1 star </label></p>
                     <button type="reset" class="clear-button">Clear</button>
                   <button type="submit" class="js-bookmark-submit">Submit</button>
-                  </form>`        
+              </fieldset>    
+            </form>`        
     if(STORE.displayBookmarkForm == true){
     $('.new-bookmark-form').html(form);
         }
