@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,26 +9,30 @@
     
 </head>
 <body>
+    <header role="banner">
     <h1>Thinkful Bookmarks App</h1>
+    </header>
     <div class="button-area">
         <button type="button" class="add-bookmark">Add Bookmark</button>
         <div class="filter-rating">
+            <fieldset>
                 <select name="stars" class="stars-options">
-                        <option value="all">All bookmarks</option>
-                        <option value="5">5 stars</option>
-                        <option value="4">4 stars</option>
-                        <option value="3">3 stars</option>
-                        <option value="2">2 stars</option>
-                        <option value="1">1 star</option>
+                        <option id="all-stars" value="all">All bookmarks</option>
+                        <option id="5-stars" value="5">5 stars</option>
+                        <option id="4-stars" value="4">4 stars</option>
+                        <option id="3-stars" value="3">3 stars</option>
+                        <option id="2-stars" value="2">2 stars</option>
+                        <option id="1-stars" value="1">1 star</option>
                       </select>
+            </fieldset>          
         </div>
         <button type="submit" class="filter-submit">Submit</button>
     </div>
-    <div class="error hidden"></div>
-    <div class="new-bookmark-form">
+    <div class="error hidden" role="alertdialog"></div>
+    <div class="new-bookmark-form" role="form">
         
     </div>
-    <div class="js-bookmark-list">
+    <div class="js-bookmark-list" role="contentinfo">
         
     </div>    
     
