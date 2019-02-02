@@ -15,6 +15,7 @@ const bookmarks = (function(){
                 <label for="bookmark-description">Description</label>
                 <input type="text" name="Description" class='description-entry' id="bookmark-description"><br>
                    
+                    
                     <p><input type="radio" name="stars" value="5" id="5-stars"><label for="5-stars"> 5 stars</label></p>
                     <p><input type="radio" name="stars" value="4" id="4-stars"><label for="4-stars"> 4 stars</label></p>
                     <p><input type="radio" name="stars" value="3" id="3-stars"><label for="3-stars"> 3 stars</label></p>

@@ -17,6 +17,20 @@ form{
     border-radius: 10px;
 }
 
+.stars-options {
+    
+    margin: 5px;
+    padding:0.7em 1.4em;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.15em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight:400;
+    color:rgb(62, 85, 119);
+    display: block;
+    width: 100%; 
+}
+
 
 .new-bookmark{
     padding: 20px;
@@ -26,6 +40,7 @@ form{
     background-color: rgb(206, 237, 240);
     margin: 10px;
     box-shadow: 5px 5px rgb(185, 215, 218);
+    line-height: 1.8;
     
 }
 
