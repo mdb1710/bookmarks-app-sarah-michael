@@ -18,7 +18,7 @@ const bookmarks = (function(){
                     <p><input type="radio" name="stars" value="3" id="3-stars"><label for="3-stars"> 3 stars</label></p>
                     <p><input type="radio" name="stars" value="2" id="2-stars"><label for="2-stars"> 2 stars</label></p>
                     <p><input type="radio" name="stars" value="1" id="1-stars"><label for="1-stars"> 1 star </label></p>
-                    <button type="reset">Clear</button>
+                    <button type="reset" class="clear-button">Clear</button>
                   <button type="submit" class="js-bookmark-submit">Submit</button>
                   </form>`        
     if(STORE.displayBookmarkForm == true){
@@ -70,19 +70,19 @@ function captureBookmark(){
 function renderBookmark(bookmark){
  if (STORE.hideURL == true){
  return `<li class='new-bookmark' id="${bookmark.id}">
-        <button class="expand-button" type="button">Expand</button><br>
-        <button class="delete-button" type="button">Delete</button><br>
-        Title: ${bookmark.title} <br>
-        Rating: ${bookmark.rating} <br>
+        <p><button class="expand-button" type="button">Expand</button>
+        <button class="delete-button" type="button">Delete</button></p><br>
+        <h3>Title: ${bookmark.title} <br>
+        Rating: ${bookmark.rating} <br></h3>
         </li>`
  } else {
  return `<li class='new-bookmark' id="${bookmark.id}">
-    <button class="expand-button" type="button">Expand</button><br>
-    <button class="delete-button" type="button">Delete</button><br>
-    Title: ${bookmark.title} <br>
+    <p><button class="expand-button" type="button">Expand</button>
+    <button class="delete-button" type="button">Delete</button></p><br>
+    <h3>Title: ${bookmark.title} <br>
     Rating: ${bookmark.rating} <br>
     Description: ${bookmark.desc}<br>
-     URL: <a href="https://${bookmark.url}">Visit Site</a>
+    URL: <a href="https://${bookmark.url}">Visit Site</a></h3>
      </li>`
         }
     }
