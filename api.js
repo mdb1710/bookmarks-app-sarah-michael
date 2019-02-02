@@ -64,6 +64,7 @@
     }
 
 function deleteItem(id, updateData){
+    console.log(`${BASE_URL}/${id}`);
     return apiFetch(`${BASE_URL}/${id}`, {
         method: 'DELETE',
         headers: {

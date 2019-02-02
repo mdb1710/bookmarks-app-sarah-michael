@@ -69,14 +69,14 @@ function captureBookmark(){
 
 function renderBookmark(bookmark){
  if (STORE.hideURL == true){
- return `<li class='new-bookmark' id='test'>
+ return `<li class='new-bookmark' id="${bookmark.id}">
         <button class="expand-button" type="button">Expand</button><br>
         <button class="delete-button" type="button">Delete</button><br>
         Title: ${bookmark.title} <br>
         Rating: ${bookmark.rating} <br>
         </li>`
  } else {
- return `<li class='new-bookmark' id='test'>
+ return `<li class='new-bookmark' id="${bookmark.id}">
     <button class="expand-button" type="button">Expand</button><br>
     <button class="delete-button" type="button">Delete</button><br>
     Title: ${bookmark.title} <br>
