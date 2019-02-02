@@ -138,7 +138,7 @@ function expandBookmark() {
   //This function will show full description and url of bookmark when clicked.
    //render();
     //will remove the hidden class from description and URL
-$('.expand-button').on('click', function(){
+$('li').on('click', '.expand-button', function(){
                 
     console.log('expand button works');
     toggleHiddenDescription();
