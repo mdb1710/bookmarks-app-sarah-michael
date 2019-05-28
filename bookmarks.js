@@ -183,7 +183,7 @@ const bookmarks = (function(){
   function render() {
     //This function will save to our store and server and generates bookmark page.
     console.log('render ran');
-    //const bookmarkItemString = generateBookmarkString(items);
+    
   }      
 
   function bindEventListeners(){
