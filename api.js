@@ -62,7 +62,7 @@ const api = function () {
   return {
     getBookmarks,
     createBookmark,
-    //handleSubmit,
+    
     deleteItem
   };
 

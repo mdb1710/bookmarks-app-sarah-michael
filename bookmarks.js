@@ -9,10 +9,10 @@ const bookmarks = (function(){
               <fieldset>
                 <legend>Fill out the informaton and rating for the new bookmark</legend>
                 <label for="bookmark-title">Bookmark name</label>
-                <input type="text" name="Bookmark name" class='name-entry' id="bookmark-title" required>
+                <input type="text" name="Bookmark name" class='name-entry' id="bookmark-title" required><br />
         
                 <label for="bookmark-url">URL</label>
-                <input type="text" name="URL for bookmark" class='URL-entry' id="bookmark-url" required>
+                <input type="text" name="URL for bookmark" class='URL-entry' id="bookmark-url" required><br />
                 
                 <label for="bookmark-description">Description</label>
                 <input type="text" name="Description" class='description-entry' id="bookmark-description" required><br>
