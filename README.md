@@ -1,4 +1,4 @@
-# bookmarks-app-sarah-michael
+
 Thinkful Bookmarks App
 
 Overview:
