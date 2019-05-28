@@ -94,7 +94,7 @@ form{
     width: 70%;
     margin: auto;
     font-size: 15px;
-    
+
     
 }
 
@@ -117,11 +117,11 @@ form{
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
    
-   .expand-button, .delete-button, .add-bookmark, .js-bookmark-submit, .clear-button, {
+   .expand-button, .delete-button, .add-bookmark, .js-bookmark-submit, .clear-button {
        text-align: center;
-       position: relative;
+       /* position: relative;
        /* float: left; */
-       display: block;
-       width: 100%;
+       /* display: block;
+       width: 100%; */ 
     }
 }

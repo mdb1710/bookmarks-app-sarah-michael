@@ -34,22 +34,15 @@ function generateErrorMessage(message) {
 
 
 function main() {
-//    renderBookmarkList();
-  //handleAddBookmarkClick();
-  //captureBookmark();
-  //handleFilter();
-  //render();
+
   api.getBookmarks()
-    //.then(res => res.json())
+    
     .then(data => {
       console.log(data);
       STORE.bookmarkList = data;
       bookmarks.renderBookmarkList();  
     }); 
-  //    api.createBookmark().then(res => res.json())
-  //       .then(data => {
-  //           console.log(data);
-  //       })
+  
   bookmarks.bindEventListeners();
    
 }
